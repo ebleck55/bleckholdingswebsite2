@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bleck Holdings - Family Investment Office</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for elegant typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles to apply the fonts */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark blue-gray fallback */
+        }
+        h1, h2, h3 {
+            font-family: 'Lora', serif;
+        }
+
+        /* Style for the full-screen background image */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -2;
+            background-image: url('https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            /* background-attachment: fixed; This is what creates the parallax effect */
+        }
+
+        /* A dark overlay to ensure text is readable against the background */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(17, 24, 39, 0.7); /* Dark blue-gray overlay */
+            z-index: -1;
+        }
+
+        /* Styles for the scroll-triggered fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-200 antialiased">
+
+    <!-- Background Image and Overlay -->
+    <div class="bg-container"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Main Content Sections -->
+    <!-- Each section takes up the full screen height to space out content -->
+
+    <!-- Landing Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center p-4 sm:p-8">
+        <header class="text-center w-full max-w-4xl mx-auto fade-in-section">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-medium text-white tracking-tight">
+                Bleck Holdings
+            </h1>
+            <p class="mt-4 text-lg sm:text-xl text-gray-300">
+                A Private Family Office
+            </p>
+        </header>
+    </section>
+
+    <!-- Investment Philosophy Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center p-4 sm:p-8">
+        <div class="text-center w-full max-w-4xl mx-auto fade-in-section">
+            <h2 class="text-2xl sm:text-3xl font-medium text-white">Our Philosophy</h2>
+            <div class="w-20 h-px bg-gray-500 mx-auto mt-4 mb-6"></div>
+            <p class="text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                Our investment philosophy is rooted in a long-term perspective, focusing on properties that offer enduring value and contribute positively to their communities. We combine rigorous analysis with a patient, disciplined approach to capital deployment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Approach Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center p-4 sm:p-8">
+        <div class="text-center w-full max-w-4xl mx-auto fade-in-section">
+            <h2 class="text-2xl sm:text-3xl font-medium text-white">Approach</h2>
+            <div class="w-20 h-px bg-gray-500 mx-auto mt-4 mb-6"></div>
+            <p class="text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                We are dedicated to the strategic acquisition and management of premier real estate assets. Our focus is on generational wealth preservation and growth through a curated portfolio of properties selected for their stability and potential.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center p-4 sm:p-8">
+         <footer class="text-center w-full max-w-4xl mx-auto fade-in-section">
+            <p class="text-gray-400 text-sm">
+                This website is for informational purposes only. For inquiries, please contact us through established channels.
+            </p>
+            <p class="text-gray-500 text-xs mt-2">
+                &copy; 2024 Bleck Holdings. All Rights Reserved.
+            </p>
+        </footer>
+    </section>
+
+    <script>
+        // This script handles the fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in-section');
+
+            // Set the first section to be visible immediately on load
+            if (sections.length > 0) {
+                sections[0].classList.add('is-visible');
+            }
+
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.2 // trigger when 20% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // If the element is intersecting (visible)
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Stop observing the element once it has become visible
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe each section, but skip the first one since it's already visible
+            for (let i = 1; i < sections.length; i++) {
+                observer.observe(sections[i]);
+            }
+        });
+    </script>
+
+</body>
+</html>
